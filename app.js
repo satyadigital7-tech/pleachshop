@@ -598,6 +598,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupFilterEventListeners();
     setupMobileMenu();
     setupScrollReveal();
+    setupFaqAccordion();
     
     // Quick categories and other interactions
     document.querySelectorAll(".shortcut-pill").forEach(pill => {
@@ -1537,4 +1538,50 @@ function observeNewElements() {
         const revealElements = document.querySelectorAll(".reveal-on-scroll:not(.revealed), .reveal-on-scroll-scale:not(.revealed)");
         revealElements.forEach(el => window.scrollRevealObserver.observe(el));
     }
+}
+
+// ==========================================
+// 18. FAQ Accordion Toggle
+// ==========================================
+function setupFaqAccordion() {
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach(item => {
+        const questionBtn = item.querySelector(".faq-question");
+        const answer = item.querySelector(".faq-answer");
+        const icon = item.querySelector(".faq-question .icon");
+        
+        if (questionBtn && answer) {
+            questionBtn.addEventListener("click", () => {
+                const isOpen = item.classList.contains("active");
+                
+                // Close all other items first for accordion behavior
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove("active");
+                    const otherAnswer = otherItem.querySelector(".faq-answer");
+                    const otherIcon = otherItem.querySelector(".faq-question .icon");
+                    if (otherAnswer) otherAnswer.style.maxHeight = null;
+                    if (otherIcon) {
+                        otherIcon.classList.remove("fa-minus");
+                        otherIcon.classList.add("fa-plus");
+                    }
+                });
+                
+                if (!isOpen) {
+                    item.classList.add("active");
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    if (icon) {
+                        icon.classList.remove("fa-plus");
+                        icon.classList.add("fa-minus");
+                    }
+                } else {
+                    item.classList.remove("active");
+                    answer.style.maxHeight = null;
+                    if (icon) {
+                        icon.classList.remove("fa-minus");
+                        icon.classList.add("fa-plus");
+                    }
+                }
+            });
+        }
+    });
 }
