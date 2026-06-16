@@ -597,7 +597,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setupNewsletterEventListeners();
     setupFilterEventListeners();
     setupMobileMenu();
-    setupPromoPopup();
     setupScrollReveal();
     
     // Quick categories and other interactions
@@ -1413,69 +1412,6 @@ function hideCouponModal() {
         document.body.style.overflow = "";
     }
 }
-
-// ==========================================
-// 13b. Promo Popup Modal Controller
-// ==========================================
-function setupPromoPopup() {
-    const promoOverlay = document.getElementById("promo-popup-overlay");
-    const closePromoBtn = document.getElementById("close-promo-popup-btn");
-    const promoForm = document.getElementById("promo-popup-form");
-    const promoEmail = document.getElementById("promo-popup-email");
-    const popupDismissedKey = "pleach_promo_popup_dismissed";
-
-    if (!promoOverlay) return;
-
-    // Check if user has already closed/subscribed
-    const isDismissed = localStorage.getItem(popupDismissedKey);
-    if (!isDismissed) {
-        // Show after 4 seconds
-        setTimeout(() => {
-            // Only show if no other modal is currently open to prevent overlay conflicts
-            const isCartOpen = document.getElementById("cart-sidebar") && document.getElementById("cart-sidebar").classList.contains("open");
-            const isModalOpen = document.querySelector(".modal-overlay.open");
-            if (!isCartOpen && !isModalOpen) {
-                promoOverlay.classList.add("open");
-                document.body.style.overflow = "hidden";
-            }
-        }, 4000);
-    }
-
-    if (closePromoBtn) {
-        closePromoBtn.addEventListener("click", () => {
-            promoOverlay.classList.remove("open");
-            document.body.style.overflow = "";
-            localStorage.setItem(popupDismissedKey, "true");
-        });
-    }
-
-    if (promoOverlay) {
-        promoOverlay.addEventListener("click", (e) => {
-            if (e.target === promoOverlay) {
-                promoOverlay.classList.remove("open");
-                document.body.style.overflow = "";
-                localStorage.setItem(popupDismissedKey, "true");
-            }
-        });
-    }
-
-    if (promoForm) {
-        promoForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const email = promoEmail.value.trim();
-            if (email) {
-                // Close promo popup
-                promoOverlay.classList.remove("open");
-                localStorage.setItem(popupDismissedKey, "true");
-
-                // Show the welcome coupon modal
-                showCouponModal();
-                promoEmail.value = "";
-            }
-        });
-    }
-}
-
 // ==========================================
 // 14. Filtering & Category Control
 // ==========================================
