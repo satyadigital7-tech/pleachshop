@@ -2473,11 +2473,26 @@ input[type="range"]::-webkit-slider-thumb:hover {
         grid-template-columns: 1fr;
         gap: 20px;
     }
+    
+    /* Hero styling for tablet/mobile viewports */
+    .hero-section {
+        padding: 120px 0 60px;
+    }
+    .hero-title-modern {
+        font-size: 2.4rem;
+        margin-bottom: 20px;
+    }
+    .hero-title-modern br {
+        display: none;
+    }
 }
 
 @media (max-width: 576px) {
     .hero-title, .hero-title-modern {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
+    }
+    .hero-section {
+        padding: 100px 0 50px;
     }
     .hero-actions-container {
         flex-direction: column;
@@ -2494,6 +2509,20 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
     .promo-banner {
         font-size: 0.72rem;
+    }
+    
+    /* Shrink category circles for mobile viewports */
+    .circle-item {
+        width: 80px;
+    }
+    .circle-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.4rem;
+    }
+    .circle-label {
+        margin-top: 8px;
+        font-size: 0.75rem;
     }
 }
 
@@ -3123,6 +3152,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
     .gift-results-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    /* Hide slider controls on mobile and rely on native swiping */
+    .slider-control {
+        display: none !important;
+    }
 }
 
 @media (max-width: 576px) {
@@ -3152,5 +3186,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
     
     .gift-results-grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* Scale down UGC gallery card height to look proportional in 2 columns */
+    .gallery-item {
+        height: 200px;
     }
 }
