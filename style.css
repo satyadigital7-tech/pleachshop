@@ -424,6 +424,12 @@ section {
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .mobile-menu-btn {
     display: none;
     background: transparent;
@@ -431,6 +437,15 @@ section {
     color: var(--color-text-primary);
     font-size: 1.4rem;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    transition: var(--transition-fast);
+}
+
+.mobile-menu-btn:hover {
+    color: var(--color-accent);
+    transform: scale(1.08);
 }
 
 /* ==========================================
@@ -2319,7 +2334,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     section {
         padding: 80px 5% 60px;
     }
-    .hero-title {
+    .hero-title, .hero-title-modern {
         font-size: 2.8rem;
     }
     .collections-grid {
@@ -2345,20 +2360,85 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 @media (max-width: 768px) {
-    .nav-links {
-        display: none; /* Mobile menu drawer details handled in JS or toggle styles */
+    /* Fixed mobile header bar layout */
+    .main-header {
+        position: fixed;
+        top: 38px;
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        border: none;
+        border-bottom: var(--border-glass);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+    .main-header.scrolled {
+        top: 0;
+        width: 100%;
+        border-radius: 0;
     }
     
-    /* Mobile responsive navbar search positioning overrides */
+    .header-container {
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+    }
+    
+    .logo {
+        order: 1;
+    }
+    
+    .header-actions {
+        order: 2;
+    }
+    
     .search-container {
-        width: 150px;
+        order: 3;
+        width: 100% !important;
+        margin: 0;
     }
     .search-container:focus-within {
-        width: 180px;
+        width: 100% !important;
+    }
+    
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-bg-darkest);
+        border-top: var(--border-glass);
+        border-bottom: var(--border-glass);
+        padding: 24px 20px;
+        gap: 20px;
+        z-index: 999;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+    
+    .nav-links.open {
+        display: flex;
+    }
+    
+    .nav-link {
+        width: 100%;
+        padding: 8px 0;
+        font-size: 1.1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    .nav-link::after {
+        display: none;
+    }
+    
+    .nav-separator {
+        display: none;
     }
     
     .mobile-menu-btn {
-        display: block;
+        display: flex;
     }
     
     .category-card {
@@ -2396,7 +2476,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 @media (max-width: 576px) {
-    .hero-title {
+    .hero-title, .hero-title-modern {
         font-size: 2.2rem;
     }
     .hero-actions-container {
@@ -2421,58 +2501,96 @@ input[type="range"]::-webkit-slider-thumb:hover {
    20. Limited Edition Heritage Collection Promo Banner
    ========================================== */
 .heritage-banner-section {
-    background-color: var(--color-bg-dark); /* Light grayish-blue background */
-    padding: 80px 0;
+    background-color: var(--color-bg-dark); 
+    padding: 100px 0;
     border-top: var(--border-glass);
     border-bottom: var(--border-glass);
 }
 
-.heritage-banner-title {
-    font-size: 2.2rem;
-    color: var(--color-text-primary);
-    font-weight: 700;
-    margin-bottom: 30px;
-    text-align: left;
-    letter-spacing: -0.02em;
-}
-
 .heritage-banner-card {
-    background-color: #ffffff;
-    border-radius: 28px;
-    padding: 50px 80px;
+    background: linear-gradient(135deg, #073b3a, #0b131f); /* Luxury deep teal/slate black gradient */
+    border-radius: 32px;
+    padding: 60px 80px;
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
+    grid-template-columns: 1.2fr 1fr;
     gap: 60px;
     align-items: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    position: relative;
+    overflow: hidden;
 }
 
 .heritage-banner-content {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
+    z-index: 2;
+}
+
+.heritage-banner-tag {
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    font-weight: 700;
 }
 
 .heritage-banner-text-title {
-    font-size: 2.1rem;
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--color-text-primary);
-    letter-spacing: -0.01em;
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #ffffff; /* White text for contrast on dark background */
+    letter-spacing: -0.02em;
 }
 
-.heritage-banner-text-subtitle {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--color-text-secondary);
+.heritage-banner-desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #cbd5e1; /* Slate-300 text for readability */
+    font-weight: 300;
+}
+
+.heritage-banner-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 10px 0;
+}
+
+.heritage-banner-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #e2e8f0;
+    font-size: 0.95rem;
+}
+
+.heritage-banner-list li i {
+    color: var(--color-accent);
+    font-size: 1rem;
+    width: 20px;
+}
+
+.heritage-banner-action {
+    margin-top: 10px;
+}
+
+.heritage-banner-action .btn {
+    border-color: var(--color-accent);
+    color: #ffffff;
+}
+
+.heritage-banner-action .btn:hover {
+    background: var(--color-accent);
+    color: #ffffff;
 }
 
 .heritage-banner-image-wrapper {
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
-    height: 380px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    height: 420px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .heritage-banner-image {
@@ -2480,25 +2598,25 @@ input[type="range"]::-webkit-slider-thumb:hover {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.6s ease;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .heritage-banner-card:hover .heritage-banner-image {
-    transform: scale(1.03);
+    transform: scale(1.04);
 }
 
 /* Responsive banner styles */
 @media (max-width: 992px) {
     .heritage-banner-card {
         grid-template-columns: 1fr;
-        padding: 40px;
+        padding: 40px 30px;
         gap: 40px;
     }
     .heritage-banner-image-wrapper {
-        height: 300px;
+        height: 320px;
     }
     .heritage-banner-text-title {
-        font-size: 1.7rem;
+        font-size: 2rem;
     }
 }
 
@@ -2506,18 +2624,19 @@ input[type="range"]::-webkit-slider-thumb:hover {
     .heritage-banner-section {
         padding: 60px 0;
     }
-    .heritage-banner-title {
-        font-size: 1.8rem;
-    }
     .heritage-banner-card {
         padding: 30px 20px;
         gap: 30px;
+        border-radius: 24px;
     }
     .heritage-banner-text-title {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
+    }
+    .heritage-banner-desc {
+        font-size: 0.95rem;
     }
     .heritage-banner-image-wrapper {
-        height: 220px;
+        height: 240px;
     }
 }
 
@@ -2771,5 +2890,267 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
     .metric-number {
         font-size: 1.8rem;
+    }
+}
+
+/* ==========================================
+   26. Artisan & Sourcing Spotlight Styles
+   ========================================== */
+.artisan-spotlight {
+    background-color: var(--color-bg-dark);
+    padding: 100px 0;
+    border-top: var(--border-glass);
+    border-bottom: var(--border-glass);
+}
+
+.artisan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.artisan-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 30px;
+    background-color: #ffffff;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    border: var(--border-glass);
+}
+
+.artisan-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md), var(--shadow-gold);
+    border-color: rgba(99, 102, 241, 0.15);
+}
+
+.artisan-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 20px rgba(15, 118, 110, 0.2);
+}
+
+.artisan-card h3 {
+    font-size: 1.35rem;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+}
+
+.artisan-role {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+}
+
+.artisan-desc {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin-bottom: 24px;
+}
+
+.artisan-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 6px 16px;
+    border-radius: var(--border-radius-pill);
+    background-color: rgba(99, 102, 241, 0.08);
+    color: var(--color-accent);
+    border: var(--border-gold);
+}
+
+/* ==========================================
+   27. Interactive Heritage Gift Finder Styles
+   ========================================== */
+.gift-finder {
+    background-color: var(--color-bg-darkest);
+    padding: 100px 0;
+}
+
+.gift-finder-container {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 50px;
+    padding: 50px;
+    margin-top: 40px;
+    background: #ffffff;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: var(--border-glass);
+}
+
+.gift-finder-personas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}
+
+.persona-btn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    border-radius: var(--border-radius-md);
+    background: var(--color-bg-dark);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition-normal);
+    width: 100%;
+}
+
+.persona-btn:hover {
+    background: #ffffff;
+    border-color: rgba(99, 102, 241, 0.2);
+    box-shadow: var(--shadow-sm);
+}
+
+.persona-btn.active {
+    background: #ffffff;
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1), var(--shadow-gold);
+}
+
+.persona-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(15, 118, 110, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    font-size: 1.3rem;
+    transition: var(--transition-normal);
+    flex-shrink: 0;
+}
+
+.persona-btn.active .persona-icon {
+    background: var(--color-accent);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+.persona-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.persona-info strong {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--color-text-primary);
+}
+
+.persona-info span {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.gift-finder-results {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.gift-results-header h3 {
+    font-size: 1.4rem;
+    color: var(--color-text-primary);
+}
+
+.gift-results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+/* ==========================================
+   28. Responsive Styles for New Sections
+   ========================================== */
+@media (max-width: 992px) {
+    .artisan-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gift-finder-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 30px;
+    }
+    
+    .gift-finder-personas {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        justify-content: flex-start;
+        scrollbar-width: none;
+    }
+    
+    .gift-finder-personas::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .persona-btn {
+        flex: 0 0 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .artisan-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gift-results-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .artisan-spotlight, .gift-finder {
+        padding: 60px 0;
+    }
+    
+    .gift-finder-container {
+        padding: 20px 15px;
+    }
+    
+    .persona-btn {
+        flex: 0 0 240px;
+        padding: 16px;
+        gap: 12px;
+    }
+    
+    .persona-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    .persona-info strong {
+        font-size: 0.95rem;
+    }
+    
+    .gift-results-grid {
+        grid-template-columns: 1fr;
     }
 }

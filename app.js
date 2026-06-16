@@ -599,6 +599,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupMobileMenu();
     setupScrollReveal();
     setupFaqAccordion();
+    setupGiftFinder();
     
     // Quick categories and other interactions
     document.querySelectorAll(".shortcut-pill").forEach(pill => {
@@ -1455,20 +1456,8 @@ function setupMobileMenu() {
         const icon = mobileMenuBtn.querySelector("i");
         if (navLinks.classList.contains("open")) {
             icon.className = "fa-solid fa-xmark";
-            navLinks.style.display = "flex";
-            navLinks.style.flexDirection = "column";
-            navLinks.style.position = "absolute";
-            navLinks.style.top = "90px";
-            navLinks.style.left = "0";
-            navLinks.style.width = "100%";
-            navLinks.style.backgroundColor = "var(--color-bg-darkest)";
-            navLinks.style.borderBottom = "var(--border-glass)";
-            navLinks.style.padding = "20px 5%";
-            navLinks.style.gap = "20px";
-            navLinks.style.zIndex = "999";
         } else {
             icon.className = "fa-solid fa-bars";
-            navLinks.style.display = "";
         }
     });
 }
@@ -1584,4 +1573,112 @@ function setupFaqAccordion() {
             });
         }
     });
+}
+
+// ==========================================
+// 19. Interactive Gift Finder Planner
+// ==========================================
+function setupGiftFinder() {
+    const personaBtns = document.querySelectorAll(".persona-btn");
+    const displayLabel = document.getElementById("persona-name-display");
+    const resultsGrid = document.getElementById("gift-results-grid");
+    
+    if (!resultsGrid) return;
+    
+    const PERSONA_CONFIGS = {
+        "history-buff": {
+            title: "The History Buff",
+            ids: ["p1", "p8", "p11", "p17", "p37"]
+        },
+        "minimalist": {
+            title: "The Modern Minimalist",
+            ids: ["p4", "p5", "p24", "p27", "p28"]
+        },
+        "home-creator": {
+            title: "The Workspace Stylist",
+            ids: ["p2", "p12", "p15", "p31", "p32"]
+        }
+    };
+    
+    function renderGiftResults(persona) {
+        resultsGrid.innerHTML = "";
+        const config = PERSONA_CONFIGS[persona];
+        if (!config) return;
+        
+        if (displayLabel) {
+            displayLabel.innerText = config.title;
+        }
+        
+        const filteredProducts = PRODUCTS_DB.filter(p => config.ids.includes(p.id));
+        
+        filteredProducts.forEach(p => {
+            const isWishlisted = appState.wishlist.includes(p.id);
+            const starsHTML = generateStarsHTML(p.rating);
+            
+            const card = document.createElement("div");
+            card.className = "product-card reveal-on-scroll-scale revealed";
+            card.innerHTML = `
+                <div class="product-image-container">
+                    <img src="${p.image}" alt="${p.name}" loading="lazy">
+                    <button class="wishlist-btn ${isWishlisted ? 'active' : ''}" data-id="${p.id}" aria-label="Add to Wishlist">
+                        <i class="${isWishlisted ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                    </button>
+                    <div class="product-overlay">
+                         <button class="btn btn-primary quick-add-btn" data-id="${p.id}"><i class="fa-solid fa-cart-plus"></i> Quick Add</button>
+                         <button class="btn btn-outline detail-view-btn" data-id="${p.id}">View Details</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-meta">
+                        <span class="product-category">${p.category}</span>
+                        <div class="rating-stars">${starsHTML}</div>
+                    </div>
+                    <h3 class="product-name">${p.name}</h3>
+                    <div class="product-price">₹${p.price.toFixed(2)}</div>
+                </div>
+            `;
+            
+            resultsGrid.appendChild(card);
+            
+            // Bind events (same as main product grid)
+            card.querySelector(".product-image-container img").addEventListener("click", () => openProductModal(p.id));
+            card.querySelector(".product-name").addEventListener("click", () => openProductModal(p.id));
+            
+            card.querySelector(".quick-add-btn").addEventListener("click", (e) => {
+                e.stopPropagation();
+                addToCart({
+                    id: p.id,
+                    name: p.name,
+                    price: p.price,
+                    image: p.image,
+                    isCustom: false,
+                    quantity: 1
+                });
+            });
+            
+            card.querySelector(".detail-view-btn").addEventListener("click", (e) => {
+                e.stopPropagation();
+                openProductModal(p.id);
+            });
+            
+            card.querySelector(".wishlist-btn").addEventListener("click", (e) => {
+                e.stopPropagation();
+                toggleWishlist(p.id, e.currentTarget);
+            });
+        });
+    }
+    
+    personaBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            personaBtns.forEach(b => b.classList.remove("active"));
+            const currentBtn = e.currentTarget;
+            currentBtn.classList.add("active");
+            
+            const persona = currentBtn.getAttribute("data-persona");
+            renderGiftResults(persona);
+        });
+    });
+    
+    // Initial render
+    renderGiftResults("history-buff");
 }

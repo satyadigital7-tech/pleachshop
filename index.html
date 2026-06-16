@@ -38,14 +38,17 @@
                 <button class="clear-search" id="clear-search-btn" aria-label="Clear search"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
-            <!-- Right: Navigation Links & Actions -->
+            <!-- Right: Navigation Links -->
             <nav class="nav-links" id="nav-links">
                 <a href="#shop-categories" class="nav-link">Shop</a>
                 <span class="nav-separator">•</span>
                 <a href="#featured-collections" class="nav-link">Collections</a>
                 <span class="nav-separator">•</span>
                 <a href="#limited-edition" class="nav-link">Heritage</a>
-                <span class="nav-separator">•</span>
+            </nav>
+
+            <!-- Actions block: Cart, Wishlist, and Hamburger Menu -->
+            <div class="header-actions" id="header-actions">
                 <button class="icon-btn cart-trigger" id="cart-toggle-btn" aria-label="Open Cart">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="badge" id="cart-badge">0</span>
@@ -54,12 +57,11 @@
                     <i class="fa-regular fa-heart"></i>
                     <span class="badge" id="wishlist-badge">0</span>
                 </button>
-            </nav>
-
-            <!-- Mobile Menu Toggle -->
-            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -251,17 +253,76 @@
         </div>
     </section>
 
+    <!-- 6c. Interactive Heritage Gift Finder Section -->
+    <section class="gift-finder" id="gift-finder">
+        <div class="container">
+            <div class="section-header text-center reveal-on-scroll">
+                <span class="section-tag">CURATED RECOMMENDATIONS</span>
+                <h2 class="section-title">Heritage Gift Planner</h2>
+                <p class="section-subtitle">Select a collector persona below to instantly filter our products and find the perfect heritage gift.</p>
+                <div class="title-divider"></div>
+            </div>
+
+            <div class="gift-finder-container glass-card reveal-on-scroll">
+                <div class="gift-finder-personas">
+                    <button class="persona-btn active" data-persona="history-buff">
+                        <div class="persona-icon"><i class="fa-solid fa-book-atlas"></i></div>
+                        <div class="persona-info">
+                            <strong>The History Buff</strong>
+                            <span>Deep prints & historical blueprints</span>
+                        </div>
+                    </button>
+
+                    <button class="persona-btn" data-persona="minimalist">
+                        <div class="persona-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <div class="persona-info">
+                            <strong>The Modern Minimalist</strong>
+                            <span>Sleek accessories & clean cases</span>
+                        </div>
+                    </button>
+
+                    <button class="persona-btn" data-persona="home-creator">
+                        <div class="persona-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                        <div class="persona-info">
+                            <strong>The Workspace Stylist</strong>
+                            <span>Stoneware mugs & desk setups</span>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="gift-finder-results">
+                    <div class="gift-results-header">
+                        <h3>Recommended for <span id="persona-name-display" class="gold-text">The History Buff</span>:</h3>
+                    </div>
+                    <div class="gift-results-grid" id="gift-results-grid">
+                        <!-- Filled dynamically based on chosen persona -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 6b. Limited Edition Heritage Collection Promo Banner -->
     <section class="heritage-banner-section" id="heritage-banner-section">
         <div class="container">
-            <h2 class="heritage-banner-title reveal-on-scroll">Limited Edition Heritage Collection</h2>
             <div class="heritage-banner-card reveal-on-scroll">
                 <div class="heritage-banner-content">
-                    <h3 class="heritage-banner-text-title">Exclusive artwork inspired by world architecture.</h3>
-                    <p class="heritage-banner-text-subtitle">Premium collection crafted for culture lovers.</p>
+                    <span class="heritage-banner-tag gold-text">DESIGN SHOWCASE</span>
+                    <h2 class="heritage-banner-text-title">Exclusive Artwork Inspired by Sacred Blueprints</h2>
+                    <p class="heritage-banner-desc">Every piece in our Limited Edition collection features meticulously restored draftsmanship from digital historical archives, screenprinted on heavyweight canvases with high-contrast metallic details.</p>
+                    
+                    <ul class="heritage-banner-list">
+                        <li><i class="fa-solid fa-feather-pointed"></i> Hand-restored blueprint schematics</li>
+                        <li><i class="fa-solid fa-leaf"></i> 24K gold-leaf accent detailing</li>
+                        <li><i class="fa-solid fa-certificate"></i> Serialized authentication card</li>
+                    </ul>
+                    
+                    <div class="heritage-banner-action">
+                        <a href="#limited-edition" class="btn btn-outline">Acquire Heritage Set <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
                 </div>
                 <div class="heritage-banner-image-wrapper">
-                    <img src="assets/classic_vessel.png" alt="Classic sailing vessel in harbor" class="heritage-banner-image">
+                    <img src="assets/hero_lifestyle.png" alt="Premium Pleach Shop lifestyle products display" class="heritage-banner-image">
                 </div>
             </div>
         </div>
@@ -332,6 +393,53 @@
                             <span class="metric-label">Restored Blueprints</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7c. Artisan & Sourcing Spotlight Section -->
+    <section class="artisan-spotlight" id="artisan-spotlight">
+        <div class="container">
+            <div class="section-header text-center reveal-on-scroll">
+                <span class="section-tag">THE MAKERS</span>
+                <h2 class="section-title">Behind the Craftsmanship</h2>
+                <p class="section-subtitle">Meet the master historians, digital draftspeople, and screen-printing artisans who collaborate to restore and construct our heritage collectibles.</p>
+                <div class="title-divider"></div>
+            </div>
+            
+            <div class="artisan-grid reveal-on-scroll">
+                <!-- Artisan 1 -->
+                <div class="artisan-card glass-card">
+                    <div class="artisan-avatar">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                    </div>
+                    <h3>Siddharth Mehta</h3>
+                    <span class="artisan-role">Digital Archivist</span>
+                    <p class="artisan-desc">Specializes in digital vector restoration of 12th-century temple pillars and traditional stone reliefs from structural manuscripts.</p>
+                    <div class="artisan-badge">50+ Projects Restored</div>
+                </div>
+
+                <!-- Artisan 2 -->
+                <div class="artisan-card glass-card">
+                    <div class="artisan-avatar">
+                        <i class="fa-solid fa-fill-drip"></i>
+                    </div>
+                    <h3>Radha Krishnan</h3>
+                    <span class="artisan-role">Master Printer</span>
+                    <p class="artisan-desc">Oversees the high-contrast silk screen-printing process, mixing metallic copper and 24K gold foil details on cotton canvases.</p>
+                    <div class="artisan-badge">15+ Years Crafting</div>
+                </div>
+
+                <!-- Artisan 3 -->
+                <div class="artisan-card glass-card">
+                    <div class="artisan-avatar">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3>Suresh Rao</h3>
+                    <span class="artisan-role">Stone Figurine Sculptor</span>
+                    <p class="artisan-desc">Hand-carves the miniature sacred figurines in our limited edition boxes, sourcing natural high-grade soapstone from Rajasthan.</p>
+                    <div class="artisan-badge">3rd Gen Sculptor</div>
                 </div>
             </div>
         </div>
