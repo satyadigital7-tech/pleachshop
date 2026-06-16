@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse and personalize premium, heritage-inspired lifestyle products at Pleach Shop. Experience our AI-powered product preview studio.">
+    <title>Pleach Shop | Premium Cultural Lifestyle Merchandise</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. Promotional Banner -->
+    <div class="promo-banner" id="promo-banner">
+        <div class="promo-slider">
+            <div class="promo-item active">🚚 FREE SHIPPING • ⭐ 4.9/5 CUSTOMER RATING • 🎁 GET 10% OFF FIRST ORDER</div>
+        </div>
+    </div>
+
+    <!-- 2. Navigation Bar -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <!-- Left: Logo -->
+            <a href="#" class="logo" id="header-logo">PLEACH SHOP</a>
+            
+            <!-- Middle: Search Input Field (Clean layout matching) -->
+            <div class="search-container">
+                <input type="text" id="product-search-input" placeholder="Search heritage products" aria-label="Search products">
+                <button class="clear-search" id="clear-search-btn" aria-label="Clear search"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <!-- Right: Navigation Links & Actions -->
+            <nav class="nav-links" id="nav-links">
+                <a href="#shop-categories" class="nav-link">Shop</a>
+                <span class="nav-separator">•</span>
+                <a href="#featured-collections" class="nav-link">Collections</a>
+                <span class="nav-separator">•</span>
+                <a href="#limited-edition" class="nav-link">Heritage</a>
+                <span class="nav-separator">•</span>
+                <button class="icon-btn cart-trigger" id="cart-toggle-btn" aria-label="Open Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="badge" id="cart-badge">0</span>
+                </button>
+                <button class="icon-btn" id="wishlist-toggle-btn" aria-label="View Wishlist" style="display: none;">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="badge" id="wishlist-badge">0</span>
+                </button>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Interactive Search Overlay/Results -->
+    <div class="search-results-overlay" id="search-results-overlay">
+        <div class="search-results-container">
+            <div class="search-results-header">
+                <h3>Search Results for "<span id="search-query-display"></span>"</h3>
+                <button class="close-search-btn" id="close-search-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-results-grid" id="search-results-grid">
+                <!-- Results populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Hero Section -->
+    <section class="hero-section" id="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title-modern">The Best Heritage Products <br><span class="highlight-green">for</span> <span class="highlight-blue">your lifestyle</span></h1>
+                
+                <div class="category-slider-wrapper">
+                    <button class="cat-slider-btn prev" id="cat-prev" aria-label="Previous Category"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="category-circles-container" id="category-circles-container">
+                        <div class="circle-item" data-category="T-Shirts">
+                            <div class="circle-icon">👕</div>
+                            <span class="circle-label">T-Shirts</span>
+                        </div>
+                        <div class="circle-item" data-category="Mugs">
+                            <div class="circle-icon">☕</div>
+                            <span class="circle-label">Mugs</span>
+                        </div>
+                        <div class="circle-item" data-category="Tote Bags">
+                            <div class="circle-icon">👜</div>
+                            <span class="circle-label">Bags</span>
+                        </div>
+                        <div class="circle-item" data-category="Phone Cases">
+                            <div class="circle-icon">📱</div>
+                            <span class="circle-label">Cases</span>
+                        </div>
+                        <div class="circle-item" data-category="Laptop Skins">
+                            <div class="circle-icon">💻</div>
+                            <span class="circle-label">Skins</span>
+                        </div>
+                        <div class="circle-item" data-category="Mousepads">
+                            <div class="circle-icon">🖱️</div>
+                            <span class="circle-label">Mousepads</span>
+                        </div>
+                        <div class="circle-item" data-category="Caps">
+                            <div class="circle-icon">🧢</div>
+                            <span class="circle-label">Caps</span>
+                        </div>
+                    </div>
+                    <button class="cat-slider-btn next" id="cat-next" aria-label="Next Category"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Featured Collections Section -->
+    <section class="featured-collections" id="featured-collections">
+        <div class="container">
+            <div class="section-header text-center reveal-on-scroll">
+                <span class="section-tag">CURATED PATHS</span>
+                <h2 class="section-title">Featured Collections</h2>
+                <div class="title-divider"></div>
+            </div>
+
+            <div class="collections-grid">
+                <!-- Temple T-Shirts Collection Card -->
+                <div class="collection-card glass-card reveal-on-scroll">
+                    <div class="collection-img-wrapper">
+                        <img src="assets/product_tee.png" alt="Temple T-Shirts Collection">
+                        <div class="collection-badge">New Arrival</div>
+                    </div>
+                    <div class="collection-info">
+                        <h3>Temple T-Shirts</h3>
+                        <p>Screen-printed premium cotton apparel featuring hand-sketched architecture blueprints and reliefs of historical monolithic temples.</p>
+                        <a href="#trending-products" class="btn-link" data-filter="T-Shirts">Browse Collection <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Custom Gifts Collection Card -->
+                <div class="collection-card glass-card reveal-on-scroll delay-200">
+                    <div class="collection-img-wrapper">
+                        <img src="assets/product_bag.png" alt="Customize Collection">
+                        <div class="collection-badge">Personalized</div>
+                    </div>
+                    <div class="collection-info">
+                        <h3>Customize Collection</h3>
+                        <p>Create unique heritage gifts by placing your preferred historical, cultural, or familial art prints directly onto our blank canvases.</p>
+                        <a href="#preview-studio" class="btn-link">Open Design Studio <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Shop by Category Section -->
+    <section class="shop-categories" id="shop-categories">
+        <div class="container">
+            <div class="section-header text-center reveal-on-scroll">
+                <span class="section-tag">EXPLORE BY TYPE</span>
+                <h2 class="section-title">Shop by Category</h2>
+                <div class="title-divider"></div>
+            </div>
+
+            <div class="categories-slider-container reveal-on-scroll">
+                <button class="slider-control prev" id="cat-grid-prev" aria-label="Previous Category"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="categories-viewport">
+                    <div class="categories-grid" id="categories-grid-track">
+                        <div class="category-card" data-category="T-Shirts">
+                            <div class="category-bg" style="background-image: url('assets/product_tee.png');"></div>
+                            <div class="category-content">
+                                <h3>T-Shirts</h3>
+                                <span class="category-link">View Products <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="category-card" data-category="Mugs">
+                            <div class="category-bg" style="background-image: url('assets/product_mug.png');"></div>
+                            <div class="category-content">
+                                <h3>Mugs</h3>
+                                <span class="category-link">View Products <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="category-card" data-category="Tote Bags">
+                            <div class="category-bg" style="background-image: url('assets/product_bag.png');"></div>
+                            <div class="category-content">
+                                <h3>Tote Bags</h3>
+                                <span class="category-link">View Products <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="category-card" data-category="Phone Cases">
+                            <div class="category-bg" style="background-image: url('assets/mockup_case.png');"></div>
+                            <div class="category-content">
+                                <h3>Phone Cases</h3>
+                                <span class="category-link">View Products <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="category-card" data-category="Laptop Skins">
+                            <div class="category-bg" style="background-image: url('assets/product_skin.png');"></div>
+                            <div class="category-content">
+                                <h3>Laptop Skins</h3>
+                                <span class="category-link">View Products <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="category-card" data-category="Caps">
+                            <div class="category-bg" style="background-image: url('assets/products/side-angle-baseball-cap-mockup-in-white-studio-0026 1.png');"></div>
+                            <div class="category-content">
+                                <h3>Caps</h3>
+                                <span class="category-link">View Products <i class="fa-solid fa-arrow-right-long"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-control next" id="cat-grid-next" aria-label="Next Category"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Trending Products -->
+    <section class="trending-products" id="trending-products">
+        <div class="container">
+            <div class="section-header">
+            <div>
+                <span class="section-tag">POPULAR SELECTIONS</span>
+                <h2 class="section-title">Trending Products</h2>
+            </div>
+            <!-- Dynamic Filters -->
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="T-Shirts">T-Shirts</button>
+                <button class="filter-btn" data-filter="Mugs">Mugs</button>
+                <button class="filter-btn" data-filter="Tote Bags">Tote Bags</button>
+                <button class="filter-btn" data-filter="Laptop Skins">Laptop Skins</button>
+                <button class="filter-btn" data-filter="Caps">Caps</button>
+            </div>
+        </div>
+
+        <div class="products-grid" id="products-grid">
+            <!-- Products will be generated dynamically by app.js -->
+        </div>
+        </div>
+    </section>
+
+    <!-- 6b. Limited Edition Heritage Collection Promo Banner -->
+    <section class="heritage-banner-section" id="heritage-banner-section">
+        <div class="container">
+            <h2 class="heritage-banner-title reveal-on-scroll">Limited Edition Heritage Collection</h2>
+            <div class="heritage-banner-card reveal-on-scroll">
+                <div class="heritage-banner-content">
+                    <h3 class="heritage-banner-text-title">Exclusive artwork inspired by world architecture.</h3>
+                    <p class="heritage-banner-text-subtitle">Premium collection crafted for culture lovers.</p>
+                </div>
+                <div class="heritage-banner-image-wrapper">
+                    <img src="assets/classic_vessel.png" alt="Classic sailing vessel in harbor" class="heritage-banner-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Limited Edition Heritage Collection -->
+    <section class="limited-edition" id="limited-edition">
+        <div class="container">
+            <div class="limited-edition-container">
+            <div class="limited-image-wrapper reveal-on-scroll">
+                <img src="assets/limited_edition.png" alt="Limited Edition Collectibles Box">
+                <div class="limited-badge">Only 250 Units Produced</div>
+            </div>
+            
+            <div class="limited-details reveal-on-scroll delay-200">
+                <span class="section-tag gold-text">EXCLUSIVITY REDEFINED</span>
+                <h2 class="limited-title">Limited Edition Heritage Collector's Set</h2>
+                <p class="limited-desc">Our premium, serialized box features high-relief gold embossed sacred motifs. Includes a handcrafted stone figurine, a personalized leather-bound heritage journal, and a certification card signed by master artisans. Once sold out, this collection will never be reproduced.</p>
+                
+                <div class="limited-highlights">
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-certificate"></i>
+                        <span>Individually Serialized Certificate</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-cubes"></i>
+                        <span>Velvet Lining & Premium Gift Packaging</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-gem"></i>
+                        <span>Handcrafted Gold Foil Details</span>
+                    </div>
+                </div>
+
+                <div class="price-action">
+                    <span class="limited-price">₹14,999.00</span>
+                    <button class="btn btn-primary" id="add-limited-btn">Acquire Collector Set</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- 9. AI Product Preview Studio -->
+    <section class="preview-studio" id="preview-studio">
+        <div class="container">
+            <div class="section-header text-center reveal-on-scroll">
+                <span class="section-tag">PLEACH LABS</span>
+                <h2 class="section-title">AI Product Preview Studio</h2>
+                <p class="section-subtitle">Upload your personal graphics, patterns, or artwork and see how it looks overlayed onto our premium blank merchandise canvases in real-time.</p>
+                <div class="title-divider"></div>
+            </div>
+
+            <div class="studio-container glass-card reveal-on-scroll">
+            <!-- Studio Left Pane: Controls -->
+            <div class="studio-controls">
+                <h3>1. Select Merchandise Canvas</h3>
+                <div class="product-canvas-selector">
+                    <button class="canvas-option active" data-product="T-Shirt" data-price="1299">
+                        <i class="fa-solid fa-shirt"></i>
+                        <span>T-Shirt</span>
+                    </button>
+                    <button class="canvas-option" data-product="Mug" data-price="599">
+                        <i class="fa-solid fa-mug-hot"></i>
+                        <span>Mug</span>
+                    </button>
+                    <button class="canvas-option" data-product="Tote Bag" data-price="799">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span>Tote Bag</span>
+                    </button>
+                    <button class="canvas-option" data-product="Phone Case" data-price="399">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <span>Phone Case</span>
+                    </button>
+                    <button class="canvas-option" data-product="Laptop Skin" data-price="499">
+                        <i class="fa-solid fa-laptop"></i>
+                        <span>Laptop Skin</span>
+                    </button>
+                    <button class="canvas-option" data-product="Baseball Cap" data-price="699">
+                        <i class="fa-solid fa-hat-cowboy"></i>
+                        <span>Baseball Cap</span>
+                    </button>
+                </div>
+
+                <h3>2. Upload Graphic/Design</h3>
+                <div class="upload-zone" id="upload-zone">
+                    <input type="file" id="design-upload" accept="image/*" class="file-input">
+                    <div class="upload-zone-content">
+                        <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                        <p class="upload-title">Drag & drop your image or <span class="highlight-text">browse</span></p>
+                        <p class="upload-details">Supports PNG, JPG (Recommended: Transparent PNG, min 800x800px)</p>
+                    </div>
+                </div>
+
+                <div class="adjustment-panel hidden" id="adjustment-panel">
+                    <h3>3. Adjust Alignment & Dimensions</h3>
+                    
+                    <div class="slider-group">
+                        <div class="slider-label-val">
+                            <label for="scale-slider">Size Scale</label>
+                            <span id="scale-val">100%</span>
+                        </div>
+                        <input type="range" id="scale-slider" min="10" max="150" value="100">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label-val">
+                            <label for="rotate-slider">Rotation Angle</label>
+                            <span id="rotate-val">0°</span>
+                        </div>
+                        <input type="range" id="rotate-slider" min="-180" max="180" value="0">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label-val">
+                            <label for="position-x-slider">Position X (Horizontal)</label>
+                            <span id="position-x-val">0px</span>
+                        </div>
+                        <input type="range" id="position-x-slider" min="-150" max="150" value="0">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label-val">
+                            <label for="position-y-slider">Position Y (Vertical)</label>
+                            <span id="position-y-val">0px</span>
+                        </div>
+                        <input type="range" id="position-y-slider" min="-150" max="150" value="0">
+                    </div>
+                </div>
+
+                <div class="studio-checkout">
+                    <div class="studio-price-row">
+                        <span>Total Price:</span>
+                        <strong id="studio-total-price">₹1,299.00</strong>
+                    </div>
+                    <button class="btn btn-primary w-full disabled" id="studio-add-to-cart" disabled>
+                        <i class="fa-solid fa-cart-plus"></i> Add Customized Product
+                    </button>
+                </div>
+            </div>
+
+            <!-- Studio Right Pane: Visual Canvas Mockup -->
+            <div class="studio-preview">
+                <div class="preview-canvas-wrapper" id="preview-canvas-wrapper">
+                    <!-- Base mockup template -->
+                    <img src="assets/mockup_tshirt.png" alt="Merchandise Canvas" id="base-canvas-image" class="base-canvas-image">
+                    
+                    <!-- Mask/bounding box for rendering overlays realistically -->
+                    <div class="canvas-render-boundary" id="canvas-render-boundary">
+                        <!-- Custom upload image render -->
+                        <div class="custom-render-wrapper" id="custom-render-wrapper">
+                            <img src="" alt="Custom Design Preview" id="user-design-overlay" class="user-design-overlay hidden">
+                        </div>
+                    </div>
+                    
+                    <!-- Interactive indicator overlay -->
+                    <div class="canvas-indicator" id="canvas-indicator">
+                        <span>Design Print Area</span>
+                    </div>
+                </div>
+                <div class="preview-hints">
+                    <p><i class="fa-solid fa-circle-info"></i> Real-time lighting overlay simulated. Final print coordinates will match adjustments.</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- 8. Customer Gallery -->
+    <section class="customer-gallery" id="customer-gallery">
+        <div class="container">
+            <div class="section-header text-center">
+            <span class="section-tag">COMMUNITY SPOTLIGHT</span>
+            <h2 class="section-title">Pleach Shop Collector Gallery</h2>
+            <p class="section-subtitle">Real photos captured by customers worldwide showcasing their heritage styling.</p>
+            <div class="title-divider"></div>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="assets/gallery_tee.png" alt="Customer styling Temple Tee at ruins">
+                <div class="gallery-hover-info">
+                    <p class="gallery-author">@archaeo_traveler</p>
+                    <span class="gallery-product-tag"><i class="fa-solid fa-shirt"></i> Temple Tee</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/gallery_mug.png" alt="Cozy morning coffee with Temple Mug">
+                <div class="gallery-hover-info">
+                    <p class="gallery-author">@heritage_and_reads</p>
+                    <span class="gallery-product-tag"><i class="fa-solid fa-mug-hot"></i> Temple Mug</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/product_bag.png" alt="Aesthetic setup featuring tote bag">
+                <div class="gallery-hover-info">
+                    <p class="gallery-author">@canvas_and_culture</p>
+                    <span class="gallery-product-tag"><i class="fa-solid fa-bag-shopping"></i> Tote Bag</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/hero_lifestyle.png" alt="Collector setup">
+                <div class="gallery-hover-info">
+                    <p class="gallery-author">@pleach_collector_99</p>
+                    <span class="gallery-product-tag"><i class="fa-solid fa-cubes"></i> Heritage Collection</span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- 10. Benefits Section -->
+    <section class="benefits-section" id="benefits-section">
+        <div class="container">
+            <div class="benefits-container">
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="fa-solid fa-gem"></i>
+                </div>
+                <h3>Premium Quality</h3>
+                <p>100% long-staple ringspun cotton, high-fire ceramics, and heavy-grade canvas materials built to last.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="fa-solid fa-earth-americas"></i>
+                </div>
+                <h3>Worldwide Shipping</h3>
+                <p>Express courier networks delivering heritage art directly to your door in over 120 countries.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3>Secure Checkout</h3>
+                <p>Fully certified 256-bit encrypted data processing protecting all user and financial records.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </div>
+                <h3>Easy Returns</h3>
+                <p>Love it or replace it. We offer hassle-free returns and refunds inside 30 days of receiving your shipment.</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- 11. Customer Reviews -->
+    <section class="customer-reviews" id="customer-reviews">
+        <div class="container">
+            <div class="section-header text-center">
+            <span class="section-tag">TESTIMONIALS</span>
+            <h2 class="section-title">What Collectors Say</h2>
+            <div class="title-divider"></div>
+        </div>
+
+        <div class="reviews-slider-container">
+            <button class="slider-control prev" id="review-prev" aria-label="Previous Review"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="reviews-viewport">
+                <div class="reviews-track" id="reviews-track">
+                    
+                    <div class="review-slide card glass-card">
+                        <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">"Amazing print quality. The lines of the temple architecture are extremely sharp and clean. It hasn't faded at all after five machine washes."</p>
+                        <div class="reviewer-meta">
+                            <span class="reviewer-name">Marcus V.</span>
+                            <span class="reviewer-status"><i class="fa-solid fa-circle-check"></i> Verified Collector</span>
+                        </div>
+                    </div>
+
+                    <div class="review-slide card glass-card">
+                        <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">"Perfect gift for travelers. I bought the tote bag for my sister who loves ruins and archaeology, and she takes it everywhere. Very sturdy canvas!"</p>
+                        <div class="reviewer-meta">
+                            <span class="reviewer-name">Sophia K.</span>
+                            <span class="reviewer-status"><i class="fa-solid fa-circle-check"></i> Verified Buyer</span>
+                        </div>
+                    </div>
+
+                    <div class="review-slide card glass-card">
+                        <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">"Looks premium and unique. Unlike standard store-bought mugs, this gold engraving feels heavy and high-end. I get compliments in the office every day."</p>
+                        <div class="reviewer-meta">
+                            <span class="reviewer-name">Arjun S.</span>
+                            <span class="reviewer-status"><i class="fa-solid fa-circle-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <button class="slider-control next" id="review-next" aria-label="Next Review"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        </div>
+    </section>
+
+    <!-- 12. Newsletter Subscription -->
+    <section class="newsletter-section" id="newsletter-section">
+        <div class="container">
+            <div class="newsletter-card glass-card text-center">
+            <span class="section-tag gold-text">NEWSLETTER SIGNUP</span>
+            <h2>Join the Heritage Club</h2>
+            <p>Subscribe to receive historical stories behind our design selections, priority access to limited edition drops, and get <strong>10% OFF</strong> your first order.</p>
+            
+            <form class="newsletter-form" id="newsletter-form">
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-envelope form-icon"></i>
+                    <input type="email" id="newsletter-email" placeholder="Enter your email address" required aria-label="Email address for subscription">
+                </div>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+            <p class="form-disclaimer">Zero spam. Unsubscribe at any time.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- 13. Footer -->
+    <footer class="main-footer" id="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand-column">
+                <a href="#" class="logo footer-logo">
+                    <span class="logo-accent">P</span>leach Shop
+                </a>
+                <p class="brand-tagline">Preserving heritage, crafting legacy. We design contemporary lifestyle products inspired by ancient cultural milestones, architecture, and artwork.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Follow us on Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Follow us on Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Follow us on Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" aria-label="Follow us on Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links-column">
+                <h4>Collections</h4>
+                <ul>
+                    <li><a href="#featured-collections">Temple Designs</a></li>
+                    <li><a href="#limited-edition">Limited Edition</a></li>
+                    <li><a href="#preview-studio">Custom Studio</a></li>
+                    <li><a href="#trending-products">Trending Items</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-column">
+                <h4>Support & Care</h4>
+                <ul>
+                    <li><a href="#benefits-section">Quality Standards</a></li>
+                    <li><a href="#benefits-section">Worldwide Shipping</a></li>
+                    <li><a href="#benefits-section">Returns & Exchanges</a></li>
+                    <li><a href="#benefits-section">Privacy Protection</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-column">
+                <h4>Heritage Lab</h4>
+                <p>Have an archival collection or historical drawings you want us to incorporate? Get in touch with our design committee.</p>
+                <a href="mailto:design@pleachstore.com" class="footer-email"><i class="fa-solid fa-envelope"></i> design@pleachstore.com</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Pleach Shop. All rights reserved. Built for cultural appreciation and sustainable craftsmanship.</p>
+        </div>
+    </footer>
+
+    <!-- 8. Cart Sidebar Panel Drawer -->
+    <div class="cart-sidebar-overlay" id="cart-sidebar-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Bag (<span id="cart-count-display">0</span>)</h3>
+            <button class="close-cart-btn" id="close-cart-btn" aria-label="Close Shopping Cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div class="cart-items-container" id="cart-items-container">
+            <!-- Items rendered dynamically. When empty, show helper message -->
+            <div class="empty-cart-message">
+                <i class="fa-solid fa-bag-shopping empty-icon"></i>
+                <p>Your bag is currently empty.</p>
+                <a href="#trending-products" class="btn btn-primary close-cart-link">Browse Products</a>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="subtotal-row">
+                <span>Subtotal:</span>
+                <strong id="cart-subtotal">₹0.00</strong>
+            </div>
+            <p class="shipping-info-text"><i class="fa-solid fa-truck-fast"></i> Taxes and shipping calculated at checkout.</p>
+            
+            <button class="btn btn-primary w-full" id="checkout-btn">Proceed to Checkout</button>
+            <button class="btn btn-outline w-full close-cart-link" style="margin-top: 10px;">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Newsletter Success Coupon Modal -->
+    <div class="modal-overlay" id="coupon-modal-overlay">
+        <div class="modal-content glass-card text-center">
+            <button class="close-modal-btn" id="close-coupon-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h2>Welcome to the Club!</h2>
+            <p>Thank you for subscribing to the PLEACH Heritage newsletter.</p>
+            <p>Here is your exclusive first-order discount code:</p>
+            <div class="coupon-code-box">
+                <span id="coupon-code">WELCOME10</span>
+                <button id="copy-coupon-btn" aria-label="Copy Coupon Code"><i class="fa-solid fa-copy"></i> Copy</button>
+            </div>
+            <p class="coupon-hint">Enjoy 10% off your purchase. Applied at checkout.</p>
+        </div>
+    </div>
+
+    <!-- Automatic Promo Subscription Popup -->
+    <div class="modal-overlay" id="promo-popup-overlay">
+        <div class="promo-modal-content glass-card">
+            <button class="close-modal-btn" id="close-promo-popup-btn" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="promo-modal-grid">
+                <div class="promo-modal-image" style="background-image: url('assets/popup_artwork.png');"></div>
+                <div class="promo-modal-details">
+                    <span class="section-tag gold-text">EXCLUSIVITY REVEALED</span>
+                    <h2>Unlock 10% Off</h2>
+                    <p>Enter your email below to unlock your exclusive 10% first-order discount code and gain priority access to limited edition drops.</p>
+                    
+                    <form id="promo-popup-form" class="popup-subscription-form">
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-envelope form-icon"></i>
+                            <input type="email" id="promo-popup-email" placeholder="Enter your email address" required aria-label="Email address for discount">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full">Claim Offer</button>
+                    </form>
+                    <p class="popup-disclaimer">Zero spam. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="product-detail-modal-overlay">
+        <div class="product-modal-content glass-card">
+            <button class="close-modal-btn" id="close-product-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="product-modal-grid">
+                <div class="product-modal-image">
+                    <img src="" id="modal-product-img" alt="Product Image">
+                </div>
+                <div class="product-modal-details">
+                    <span class="section-tag" id="modal-product-category">CATEGORY</span>
+                    <h2 id="modal-product-name">Product Name</h2>
+                    <div class="rating-row">
+                        <div class="rating-stars" id="modal-product-stars">
+                            <!-- Star icons populated dynamically -->
+                        </div>
+                        <span class="reviews-count" id="modal-product-reviews-count">(0 reviews)</span>
+                    </div>
+                    <div class="modal-price" id="modal-product-price">$0.00</div>
+                    <p class="modal-desc" id="modal-product-desc">Detailed product description text...</p>
+                    
+                    <div class="modal-meta-specs">
+                        <div class="spec-row">
+                            <strong>Material:</strong>
+                            <span id="modal-product-material">100% Premium Material</span>
+                        </div>
+                        <div class="spec-row">
+                            <strong>Eco-Friendly:</strong>
+                            <span>Yes, sustainable production</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary w-full" id="modal-add-to-cart-btn">Add to Bag</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Javascript Controller -->
+    <script src="app.js"></script>
+</body>
+</html>
