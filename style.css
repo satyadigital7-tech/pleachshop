@@ -11,8 +11,8 @@
     --color-bg-glass: rgba(255, 255, 255, 0.85);
     --color-primary: #0f766e;       /* Teal */
     --color-primary-light: #0d9488;
-    --color-accent: #6366f1;        /* Indigo */
-    --color-accent-light: #4f46e5;
+    --color-accent: #e46d40;        /* Coral/Orange */
+    --color-accent-light: #f3865c;  /* Lighter Coral/Orange */
     --color-text-primary: #0f172a;  /* Slate-900 */
     --color-text-secondary: #475569;/* Slate-600 */
     --color-text-dark: #0f172a;
@@ -452,7 +452,7 @@ section {
    4. Promotional Banner
    ========================================== */
 .promo-banner {
-    background: linear-gradient(90deg, #0f766e, #6366f1);
+    background: linear-gradient(90deg, #0f766e, #e46d40);
     color: white;
     font-size: 0.8rem;
     font-weight: 700;
@@ -548,7 +548,7 @@ section {
 }
 
 .highlight-blue {
-    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    background: linear-gradient(90deg, #3b82f6, #e46d40);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
@@ -682,7 +682,7 @@ section {
    ========================================== */
 .collections-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
@@ -2485,6 +2485,17 @@ input[type="range"]::-webkit-slider-thumb:hover {
     .hero-title-modern br {
         display: none;
     }
+    
+    /* Trending products responsive layout and filters wrapping */
+    .trending-products .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .product-filters {
+        flex-wrap: wrap;
+        width: 100%;
+    }
 }
 
 @media (max-width: 576px) {
@@ -2523,6 +2534,19 @@ input[type="range"]::-webkit-slider-thumb:hover {
     .circle-label {
         margin-top: 8px;
         font-size: 0.75rem;
+    }
+    
+    /* Cart sidebar screen constraint on extra mobile viewports */
+    .cart-sidebar {
+        max-width: 100%;
+        right: -100%;
+    }
+    
+    /* Price action element wrapping on extra mobile viewports */
+    .price-action {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
     }
 }
 
